@@ -1,8 +1,6 @@
 function addToInput(btn) {
     const curBtnClass = btn.classList[0];
-    console.log([curClass, lastClass])
-    if (curClass === curBtnClass && curClass === "numpad" ||
-               (curBtnClass === "numpad" && curClass === "equals")) {
+    if (curBtnClass === "numpad" && curClass === "equals") {
         alert("Please click an operator");
     } else if (curClass === undefined && curBtnClass === "operator") {
         alert("Please click a number")
@@ -17,7 +15,6 @@ function addToInput(btn) {
         } else if ((lastClass === "numpad" && curClass === "operator") ||
                 (lastClass === "operator" && curClass === "numpad") ||
                 (lastClass === "equals" && curClass === "operator")) {
-            lastInsert = inputBox.textContent;
             resultBox.textContent = resultBox.textContent + " " + inputBox.textContent;
             inputBox.textContent = btn.textContent;
         } else if (lastClass === "numpad" && curClass === "numpad") {
@@ -42,7 +39,8 @@ function getResults(fromButton = true) {
     const resultsArr = resultsBox.textContent.split(" ")
                         .filter(x => x !== "");
     [num1, operation, num2] = [...resultsArr];
-    resultsBox.textContent = operations[operation](parseFloat(num1), parseFloat(num2));
+    const result = operations[operation](parseFloat(num1), parseFloat(num2));
+    resultsBox.textContent = result;
     if(fromButton) {
         inputBox.textContent = "";
         curClass = "equals";
